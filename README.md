@@ -17,4 +17,4 @@ jumps over hill size, average jury note points and average wind compensation. Mo
 
 # Jump prediction
 This is a machine learning project where I created a simple linear regression model to predict the length of jump based on speed, wind compensation,
-k-point and hill size of the hill. Here you can find, when we can predict it well and when it is difficult.
+k-point and hill-size. Here you can find, when we can predict it well and when it is difficult.
