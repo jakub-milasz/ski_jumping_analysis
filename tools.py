@@ -45,14 +45,11 @@ def analyse_overall_stats(name):
     hs_jumps = np.sum(res['dist'] >= res['hill_size_x'])
     mean_notes = res['note_points'].mean()
     average_comp = res['wind_comp'].mean()
+    plot_histogram(name, res['dist'])
     return hs_jumps, mean_notes, average_comp
 
 
-def plot_histogram(name):
-    codex = names[names['name'] == name].iloc[0,1]
-    res = merged[merged['codex_x'] == codex]
-    plt.hist(res['dist'], bins=20)
+def plot_histogram(name, dist):
+    plt.hist(dist, bins=20)
     plt.title(f"Rozkład odległości uzyskanych przez skoczka {name}")
     plt.show()
-
-plot_histogram('stoch kamil')
