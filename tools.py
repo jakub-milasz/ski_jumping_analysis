@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 comps = pd.read_csv("data/all_comps.csv")
@@ -40,8 +41,18 @@ def analyse_overall_stats(name):
     # tutaj pozyskamy ilość skoków za hs, średnią notę za styl oraz procent skoków za punkt K
     codex = names[names['name'] == name].iloc[0,1]
     res = merged[merged['codex_x'] == codex]
-    res = res[['dist', 'k-point', 'note_points', 'hill_size_x']]
+    res = res[['dist', 'k-point', 'note_points', 'hill_size_x', 'wind_comp']]
     hs_jumps = np.sum(res['dist'] >= res['hill_size_x'])
     mean_notes = res['note_points'].mean()
-    k_point_jumps = np.sum(res['dist'] >= res['k-point'])/res.shape[0] * 100
-    return hs_jumps, mean_notes, k_point_jumps
+    average_comp = res['wind_comp'].mean()
+    return hs_jumps, mean_notes, average_comp
+
+
+def plot_histogram(name):
+    codex = names[names['name'] == name].iloc[0,1]
+    res = merged[merged['codex_x'] == codex]
+    plt.hist(res['dist'], bins=20)
+    plt.title(f"Rozkład odległości uzyskanych przez skoczka {name}")
+    plt.show()
+
+plot_histogram('stoch kamil')
