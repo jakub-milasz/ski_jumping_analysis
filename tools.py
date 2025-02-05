@@ -7,6 +7,9 @@ comps = pd.read_csv("data/all_comps.csv")
 names = pd.read_csv("data/all_names.csv")
 results = pd.read_csv("data/all_results.csv")
 
+def find_codex(name):
+    return names[names['name'] == name].iloc[0,1]
+
 
 merged = results.merge(comps, on="id")
 nh = merged[(merged['k-point'] > 75) & (merged['k-point'] < 100)]
@@ -16,7 +19,7 @@ fh = merged[merged['k-point'] > 170]
 
 def analyse_skijumper(hill, name):
     """
-    hill: rodzaj skoczni. Do wyboru: 'normalne', 'duże', 'mamucie'/
+    hill: rodzaj skoczni. Do wyboru: 'normalne', 'duże', 'mamucie'
     name: nazwa skoczka w konwencji: 'nazwisko imię'
     """
     if hill == 'normalne':
@@ -25,27 +28,22 @@ def analyse_skijumper(hill, name):
         data = lh
     elif hill == 'mamucie':
         data = fh
-    codex = names[names['name'] == name].iloc[0,1]
-    res = data[data['codex_x'] == codex]
+    res = data[data['codex_x'] == find_codex(name)]
     res = res[['dist', 'k-point', 'codex_y', 'place', 'hill_size_x', 'note_points']]
     # res = res.copy()
     res['coef'] = res['dist'] / res['k-point']
     res['hs-jumps'] = res['dist'] >= res['hill_size_x']
     grouped_coefs = res.groupby('place')['coef'].mean()
-    # hs_jumps = res['hs-jumps'].sum()
     fav_hill = grouped_coefs.idxmax()
     return fav_hill
 
 
 def analyse_overall_stats(name):
-    # tutaj pozyskamy ilość skoków za hs, średnią notę za styl oraz procent skoków za punkt K
-    codex = names[names['name'] == name].iloc[0,1]
-    res = merged[merged['codex_x'] == codex]
+    res = merged[merged['codex_x'] == find_codex(name)]
     res = res[['dist', 'k-point', 'note_points', 'hill_size_x', 'wind_comp']]
     hs_jumps = np.sum(res['dist'] >= res['hill_size_x'])
     mean_notes = res['note_points'].mean()
     average_comp = res['wind_comp'].mean()
-    plot_histogram(name, res['dist'])
     return hs_jumps, mean_notes, average_comp
 
 
