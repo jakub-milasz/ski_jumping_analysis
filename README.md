@@ -1,6 +1,6 @@
 # Ski jumping analysis
 Here you can find some ski jumping analysis based on Kaggle datasets. It contains results of almost 4000 ski jumping competitions organized between (roughly)
-2009 and 2021. I focused only on Men competitions. The project has three parts:
+2008 and 2022. I focused only on Men competitions. The project has three parts:
 - Analysis connected with overall trends in ski jumping
 - Tkinter app with individual stats
 - Jump length prediction
