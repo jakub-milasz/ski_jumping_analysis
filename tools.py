@@ -28,7 +28,7 @@ def analyse_skijumper(hill, name):
         data = lh
     elif hill == 'mamucie':
         data = fh
-    res = data[data['codex_x'] == find_codex(name)]
+    res = data[(data['codex_x'] == find_codex(name)) & (data['dist'] > 0)]
     res = res[['dist', 'k-point', 'codex_y', 'place', 'hill_size_x', 'note_points']]
     # res = res.copy()
     # coefficient = distance / k-point

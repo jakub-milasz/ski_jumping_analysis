@@ -91,7 +91,7 @@ class MyGUI:
       self.hist(name)
 
     def hist(self, name):
-      res = tl.merged[tl.merged['codex_x'] == tl.find_codex(name)]
+      res = tl.merged[(tl.merged['codex_x'] == tl.find_codex(name)) & (tl.merged['dist'] > 0)]
       fig = Figure(figsize = (10, 10), dpi = 100) 
       plot = fig.add_subplot(111) 
       plot.hist(res['dist'], bins=100)
