@@ -18,7 +18,8 @@ jumps over hill size, average jury note points and average wind compensation. Mo
 
 
 
-![Zrzut ekranu 2025-02-07 124047](https://github.com/user-attachments/assets/64c06045-c88b-45c3-baee-bd7f4c9d2de3)
+![Zrzut ekranu 2025-03-03 120037](https://github.com/user-attachments/assets/84e1f4cf-6256-48a6-8837-059e41707737)
+
 
 
 
